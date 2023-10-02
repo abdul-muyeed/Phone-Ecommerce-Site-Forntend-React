@@ -18,10 +18,14 @@
   display: none;
 }
 .legends{
+  top: 15%;
+  right: 50%;
   opacity: 0;
-  transition: all   1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 .selected > div > .legends{
+  top: 20%;
+  right: 50%;
   opacity: 1;
   transition: all 1s ease-in-out;
 }

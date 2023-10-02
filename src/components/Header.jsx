@@ -148,7 +148,7 @@ function Header() {
           <div className="border-t border-gray-300"></div>
           <div className=" bg-[#F9FAFB]">
           <div className="container">
-            <div className="hidden pt-4 sm:flex justify-center items-center space-x-5">
+            <div className="hidden py-4 sm:flex justify-center items-center space-x-5">
               <div className="opcion-con-desplegable relative" onClick={run}>
                 <div className="flex justify-center items-center cursor-pointer space-x-1">
                   <BiMenuAltLeft size={20} className=" text-gray-600" />
@@ -160,7 +160,7 @@ function Header() {
                     id="turn"
                   />
                 </div>
-                <ul className=" absolute ml-4 mt-3 p-2 hidden bg-slate-300" id="desplegable">
+                <ul className=" absolute ml-4 mt-3 p-2 hidden bg-slate-300 z-1" id="desplegable">
                   {
                     Categories.map((item, index) => {
                       return <li key={index} className="text-sm font-semibold text-gray-600 cursor-pointer"> <Link to={item.url}>
@@ -170,7 +170,7 @@ function Header() {
                   }
                 </ul>
               </div>
-              <ul className="flex justify-center items-center space-x-5">
+              <ul className="flex justify-center items-center space-x-5 z-1">
                 {
                   MenuBar.map((item, index) => {
                     return <li key={index} className="text-sm font-semibold text-gray-600 cursor-pointer"> <Link to={item.url}>
