@@ -66,6 +66,7 @@ function Header() {
   return (
     <>
     <div className='z-10 fixed h-full bg-white  right-0 subcart flex flex-col active' id='subcart'>
+      <div className="h-full relative">
       <div className="flex justify-between p-2 bg-slate-400" >
       <div>Shopping Cart (1)</div>
       <div className="cursor-pointer" onClick={subcart}><BiX size={22}/></div>
@@ -78,7 +79,9 @@ function Header() {
         <div>
           <BiX size={22}/>
         </div>
-      </div><div className="flex gap-2 items-center border-b">
+      </div>
+      
+      <div className="flex gap-2 items-center border-b">
         <div><img className="h-20 w-20 border m-1" src={'/src/assets/s21-1.webp'} alt="" /></div>
         <div><h1 className="text-sm">Samsung Galaxy S23 Ultra 5G</h1>
         <div>1 x ৳12000</div>
@@ -86,6 +89,31 @@ function Header() {
         <div>
           <BiX size={22}/>
         </div>
+      </div>
+        <div className="absolute w-full bottom-0">
+
+        <div className="border-y py-2">
+                    <div className="flex justify-between px-2">
+                        <div className="text-left font-semibold">Subtotal</div>
+                        <div className="text-right">৳ 117,990</div>
+                    </div>
+                    <div className="flex justify-between border-b px-2">
+                        <div className="text-left font-semibold">Shipping</div>
+                        <div className="text-right">৳ 0</div>
+                    </div>
+                    <div className="flex justify-between pt-2 px-2">
+                        <div className="text-left font-semibold">Total</div>
+                        <div className="text-right">৳ 117,990</div>
+                    </div>
+                </div>
+                <div className="flex justify-evenly items-center my-5">
+                    <button className=" bg-sky-500 text-white px-5 py-2 rounded-lg hover:bg-sky-700 ">Checkout</button>
+                    <button className=" bg-sky-500 text-white px-5 py-2 rounded-lg hover:bg-sky-700 ">View Cart</button>
+
+                </div>
+          
+          </div>
+
       </div>
       
 
