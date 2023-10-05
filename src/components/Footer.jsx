@@ -3,7 +3,7 @@ import { BiLogoFacebookCircle,BiLogoTwitter,BiLogoLinkedinSquare,BiLogoInstagram
 function Footer() {
   return (
     <>
-    <div className="relative bg-blueGray-200 pt-8">
+    <div className="relative bg-[#F9FAFB] pt-8">
   <div className="container">
     <div className="flex flex-wrap text-left lg:text-left pb-5">
       <div className="w-full lg:w-6/12 px-4">

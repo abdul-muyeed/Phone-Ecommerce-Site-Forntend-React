@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import Header from "../components/Header"
 
 function SignIn(){
   return(
     <>
-    <Header/>
+    
     <div className="bg-[#F9FAFB] h-screen w-screen flex items-center">
         <div className="h-max mx-auto flex flex-col items-center">
             <h1 className="text-xl font-bold text-center pb-10">Login to your account</h1>

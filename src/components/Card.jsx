@@ -37,7 +37,7 @@ function Card() {
           Realme GT Master Edition
           </h2>
           <div className=" mt-2.5 mb-5 flex justify-between">
-          <span className="flex w-fit justify-center items-center gap-2 bg-[#C8E9E9] text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"> <BiSolidStar color='#FFE900'/> <span>5.0 <span className='text-gray-600'>(123)</span></span>  </span>
+          <span className="flex w-fit justify-center items-center gap-2 bg-[#C8E9E9] text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"> <BiSolidStar color='#FFD700'/> <span>5.0 <span className='text-gray-600'>(123)</span></span>  </span>
           <BiHeart color='red' onClick={showAlert('successful','Added to Favorite','green','')}/>
         </div>
           <div className="flex items-center">

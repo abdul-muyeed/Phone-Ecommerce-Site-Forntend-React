@@ -8,6 +8,7 @@ import {
   BiHeart,
   BiCart,
   BiXCircle,
+  BiX,
 } from "react-icons/bi";
 import { Link } from "react-router-dom";
 const iconNum = `flex justify-center items-center absolute w-4 h-4 right-[-10px] top-[-5px]  bg-sky-500 rounded-xl text-xs font-semibold text-white`;
@@ -57,9 +58,38 @@ function Header() {
   ]);
   const [show, setShow] = useState("hidden");
   const [drop, setDrop] = useState("top-[-999px]");
+  const subcart = () => {
+    const subcart = document.getElementById('subcart')
+    subcart.classList.toggle('active')
+  }
 
   return (
     <>
+    <div className='z-10 fixed h-full bg-white  right-0 subcart flex flex-col active' id='subcart'>
+      <div className="flex justify-between p-2 bg-slate-400" >
+      <div>Shopping Cart (1)</div>
+      <div className="cursor-pointer" onClick={subcart}><BiX size={22}/></div>
+      </div>
+      <div className="flex gap-2 items-center border-b">
+        <div><img className="h-20 w-20 border m-1" src={'/src/assets/s21-1.webp'} alt="" /></div>
+        <div><h1 className="text-sm">Samsung Galaxy S23 Ultra 5G</h1>
+        <div>1 x ৳12000</div>
+        </div>
+        <div>
+          <BiX size={22}/>
+        </div>
+      </div><div className="flex gap-2 items-center border-b">
+        <div><img className="h-20 w-20 border m-1" src={'/src/assets/s21-1.webp'} alt="" /></div>
+        <div><h1 className="text-sm">Samsung Galaxy S23 Ultra 5G</h1>
+        <div>1 x ৳12000</div>
+        </div>
+        <div>
+          <BiX size={22}/>
+        </div>
+      </div>
+      
+
+    </div>
       <div
         className={` fixed ${drop} flex w-screen h-screen bg-gray-300 bg-opacity-75 align-center z-50 sm:hidden transition-all duration-500 ease-linear `}
       >
@@ -185,7 +215,7 @@ function Header() {
                 </span>
                 <span className="relative cursor-pointer">
                   <span className={`${iconNum}`}>0</span>
-                  <BiCart className="icon-size" />
+                  <BiCart onClick={subcart} className="icon-size" />
                 </span>
               </div>
             </div>
