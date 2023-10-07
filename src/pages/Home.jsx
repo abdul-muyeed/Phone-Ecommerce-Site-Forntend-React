@@ -5,6 +5,7 @@ import ProductPreview from "../components/ProductPreview";
 
 
 
+
 function Home() {
   
 
@@ -12,6 +13,7 @@ function Home() {
  
   return (
     <>
+    
       <HeroSection/>
       <Trending />
       <ProductPreview />

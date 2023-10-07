@@ -1,5 +1,5 @@
 import Logo from "../assets/logo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   BiSolidChevronDown,
   BiMenuAltLeft,
@@ -62,7 +62,22 @@ function Header() {
     const subcart = document.getElementById('subcart')
     subcart.classList.toggle('active')
   }
-
+  const [userData, setUserData] = useState({})
+  const user = async () => {
+    const res = await fetch("/api/token", {
+      method: "GET",
+      // credentials: "include",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    
+      setUserData(data);
+}
+  
+  useEffect(() => {
+    user()
+  },[])
+    
   return (
     <>
     <div className='z-10 fixed h-full bg-white  right-0 subcart flex flex-col active' id='subcart'>
@@ -204,30 +219,44 @@ function Header() {
                   <BiSearch color="white" size={22} />
                 </div>
               </div>
-              <div className="flex justify-between items-center sm:space-x-5 space-x-2 cursor-pointer">
+              <div className="flex justify-between items-center sm:space-x-5 space-x-2 cursor-pointer ">
                 <span className="relative">
                   <div
-                    className={`absolute ml-4 mt-3 p-2 top-2 md:top-4 left-[-40px] bg-slate-300 z-10 ${show}`}
+                    className={`absolute ml-4 mt-3 p-2 top-2 md:top-4 left-[-40px] bg-slate-300 z-10 w-36 text-center ${show}`}
                     onMouseEnter={() => setShow("")}
                     onMouseLeave={() => setShow("hidden")}
                   >
-                    <span className="text-sm text-center">Welcome</span>
+                    <span className="text-sm">Welcome</span>
                     <ul>
                       <li>
+                        <div>
                         <Link
                           to="/login"
                           className="text-sm font-semibold text-gray-600 cursor-pointer"
                         >
-                          Login
+                          {
+                            userData.name ? userData.name : 'Login'
+                          }
+                          
                         </Link>
+                        </div>
+                        
                       </li>
                       <li>
-                        <Link
+                        {
+                          userData ? (<Link
+                          to="/signout"
+                          className="text-sm font-semibold text-gray-600 cursor-pointer"
+                        >
+                          Sign Out
+                        </Link>) : (<Link
                           to="/signin"
                           className="text-sm font-semibold text-gray-600 cursor-pointer"
                         >
                           Sign Up
-                        </Link>
+                        </Link>)
+                        }
+                        
                       </li>
                     </ul>
                   </div>
