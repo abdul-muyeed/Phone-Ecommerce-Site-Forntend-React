@@ -1,5 +1,6 @@
 import Logo from "../assets/logo";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
   BiSolidChevronDown,
   BiMenuAltLeft,
@@ -27,7 +28,8 @@ const run1 = () => {
   turn.classList.toggle("rotate-180");
 };
 
-function Header() {
+function Header({count}) {
+  console.log(count)
   const [Categories] = useState([
     {
       url: "/item1",
@@ -63,6 +65,7 @@ function Header() {
     subcart.classList.toggle('active')
   }
   const [userData, setUserData] = useState({})
+  // eslint-disable-next-line no-unused-vars
   const user = async () => {
     const res = await fetch("/api/token", {
       method: "GET",
@@ -75,12 +78,12 @@ function Header() {
 }
   
   useEffect(() => {
-    user()
+    // user()
   },[])
     
   return (
     <>
-    <div className='z-10 fixed h-full bg-white  right-0 subcart flex flex-col active' id='subcart'>
+    <div className='z-10 fixed h-full bg-white  right-0 subcart flex flex-col active shadow-lg' id='subcart'>
       <div className="h-full relative">
       <div className="flex justify-between p-2 bg-slate-400" >
       <div>Shopping Cart (1)</div>
@@ -122,8 +125,14 @@ function Header() {
                     </div>
                 </div>
                 <div className="flex justify-evenly items-center my-5">
-                    <button className=" bg-sky-500 text-white px-5 py-2 rounded-lg hover:bg-sky-700 ">Checkout</button>
-                    <button className=" bg-sky-500 text-white px-5 py-2 rounded-lg hover:bg-sky-700 ">View Cart</button>
+                  <Link to="/checkout">
+                  <button className=" bg-sky-500 text-white px-5 py-2 rounded-lg hover:bg-sky-700 "> Checkout</button>
+                  </Link>
+                  <Link to="/cart">
+                  <button className=" bg-sky-500 text-white px-5 py-2 rounded-lg hover:bg-sky-700 "> View Cart</button>
+                  </Link>
+                    
+                    
 
                 </div>
           
@@ -186,7 +195,7 @@ function Header() {
           </ul>
         </div>
       </div>
-      <header>
+      <header className=" border-b border-gray-300">
         <nav>
           <div className="container bg-white">
             <div className="flex justify-center mt-2 sm:hidden">
@@ -271,7 +280,7 @@ function Header() {
                   <BiHeart className="icon-size" />
                 </span>
                 <span className="relative cursor-pointer">
-                  <span className={`${iconNum}`}>0</span>
+                  <span className={`${iconNum}`}>{count}</span>
                   <BiCart onClick={subcart} className="icon-size" />
                 </span>
               </div>
@@ -331,3 +340,7 @@ function Header() {
   );
 }
 export default Header;
+
+Header.propTypes = {
+  count: PropTypes.number,
+};

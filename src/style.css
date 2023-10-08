@@ -70,3 +70,6 @@ input[type='number']::-webkit-outer-spin-button {
   right: -350px;
   transition: all 0.4s ease-in-out;
 }
+.product-wrap{
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}

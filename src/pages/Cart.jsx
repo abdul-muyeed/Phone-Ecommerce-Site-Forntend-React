@@ -1,4 +1,5 @@
 import { BiTrash } from "react-icons/bi"
+import { Link } from "react-router-dom"
 
 function Cart(){
     return(
@@ -33,7 +34,7 @@ function Cart(){
                         
                         <tr>
                             <td className="p-2 flex items-center gap-3">
-                                <input type="checkbox" className="h-5 w-5" value="id-1" onclick={()=>{}} />
+                                <input type="checkbox" className="h-5 w-5" value="id-1"  />
                                 <img className="h-20 w-20 border" src="/src/assets/s21-1.webp" alt="" />
                             </td>
                             <td className="p-2">
@@ -61,7 +62,7 @@ function Cart(){
                         
                         <tr>
                             <td className="p-2">
-                                <input type="checkbox" className="h-5 w-5" value="id-2" onclick="toggleCheckbox($el, 120.50)" />
+                                <input type="checkbox" className="h-5 w-5" value="id-2"  />
                             </td>
                             <td className="p-2">
                                 <div>
@@ -115,7 +116,12 @@ function Cart(){
 
             </div>
 
-
+            <div>
+                <Link to="/checkout">
+                        <button className="border border-red-500 bg-red-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline">Checkout Now</button>
+                </Link>
+            
+            </div>
             </div>
            
             

@@ -2,14 +2,17 @@ import {BiSolidStar,BiHeart} from 'react-icons/bi'
 import { useState } from "react";
 import product from '../assets/product-1.webp'
 import Alert from "./Alert";
+import PropTypes from "prop-types";
 
-function Card() {
+function Card({increment}) {
+  console.log(increment)
     const [show, setShow] = useState("");
     const [view, setview] = useState("hidden");
     const [status, setStatus] = useState("");
     const [message, setmessage] = useState("");
     const [color, setcolor] = useState("");
     const showAlert = (status,message,color,show) => () => {
+      increment()
     setStatus(status);
     setmessage(message);
     setcolor(color);
@@ -38,7 +41,7 @@ function Card() {
           </h2>
           <div className=" mt-2.5 mb-5 flex justify-between">
           <span className="flex w-fit justify-center items-center gap-2 bg-[#C8E9E9] text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"> <BiSolidStar color='#FFD700'/> <span>5.0 <span className='text-gray-600'>(123)</span></span>  </span>
-          <BiHeart color='red' onClick={showAlert('successful','Added to Favorite','green','')}/>
+          <BiHeart color='red' onClick={showAlert('successful','Added to Favorite','red','')}/>
         </div>
           <div className="flex items-center">
             
@@ -60,3 +63,7 @@ function Card() {
 }
 
 export default Card;
+
+Card.propTypes = {
+  increment: PropTypes.func,
+}

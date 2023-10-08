@@ -9,6 +9,10 @@ import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import Error from "./components/Error";
 import SignOut from "./components/signout";
+import ProductList from "./components/ProductList";
+import Checkout from "./pages/Checkout";
+import NotLoggedin from "./components/NotLoggedin";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -24,8 +28,17 @@ function App() {
         <Route path="/logIn" element={<LogIn/>} />
         <Route path="/product" element={<Product/>} />
         <Route path="/cart" element={<Cart/>} />
-        {/* <Route path="/xxx" element={<Error/>} /> */}
+        <Route path="/products" element={<ProductList/>}/>
+        <Route path="/checkout" element={
+        
+        <PrivateRoute>
+          <Checkout/>
+        </PrivateRoute>
+        
+        } />
+        <Route path="/notloggedin" element={<NotLoggedin/>} />
         <Route path="*" element={<Error/>} />
+
         
       </Routes>
       <Footer/>

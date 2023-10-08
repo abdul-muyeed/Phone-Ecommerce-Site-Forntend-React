@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 function Error () {
   return (
     <>
-        <section>
+        <section className="bg-[#F9FAFB]">
         <div className="min-h-screen flex items-center justify-center w-10/12 m-auto">
        
 
