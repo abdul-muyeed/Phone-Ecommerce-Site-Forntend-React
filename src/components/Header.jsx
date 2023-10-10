@@ -1,6 +1,5 @@
 import Logo from "../assets/logo";
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import {
   BiSolidChevronDown,
   BiMenuAltLeft,
@@ -12,6 +11,8 @@ import {
   BiX,
 } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const iconNum = `flex justify-center items-center absolute w-4 h-4 right-[-10px] top-[-5px]  bg-sky-500 rounded-xl text-xs font-semibold text-white`;
 const run = () => {
   const desplegable = document.getElementById("desplegable");
@@ -28,8 +29,16 @@ const run1 = () => {
   turn.classList.toggle("rotate-180");
 };
 
-function Header({count}) {
-  console.log(count)
+function Header() {
+  const x = useSelector(state => state.productReducer.product)
+   console.log(x)
+  const count = useSelector((state) => state.cartReducer.totalItems  );
+  const products = useSelector((state) => state.cartReducer.cart);
+  const totalPrice = useSelector((state) => state.cartReducer.totalPrice);
+  console.log(products);
+  
+  
+  
   const [Categories] = useState([
     {
       url: "/item1",
@@ -76,6 +85,7 @@ function Header({count}) {
     
       setUserData(data);
 }
+
   
   useEffect(() => {
     // user()
@@ -89,31 +99,29 @@ function Header({count}) {
       <div>Shopping Cart (1)</div>
       <div className="cursor-pointer" onClick={subcart}><BiX size={22}/></div>
       </div>
-      <div className="flex gap-2 items-center border-b">
-        <div><img className="h-20 w-20 border m-1" src={'/src/assets/s21-1.webp'} alt="" /></div>
-        <div><h1 className="text-sm">Samsung Galaxy S23 Ultra 5G</h1>
-        <div>1 x ৳12000</div>
+      {
+        products.map((item, index) => {
+          return(<>
+          <div key={index} className="flex gap-2 items-center border-b">
+        <div><img className="h-20 w-20 border m-1" src={item.image} alt="" /></div>
+        <div><h1 className="text-sm">{item.name}</h1>
+        <div>{item.quantity} x ৳{item.price}</div>
         </div>
         <div>
           <BiX size={22}/>
         </div>
       </div>
-      
-      <div className="flex gap-2 items-center border-b">
-        <div><img className="h-20 w-20 border m-1" src={'/src/assets/s21-1.webp'} alt="" /></div>
-        <div><h1 className="text-sm">Samsung Galaxy S23 Ultra 5G</h1>
-        <div>1 x ৳12000</div>
-        </div>
-        <div>
-          <BiX size={22}/>
-        </div>
-      </div>
+        
+          </>)
+            
+      })
+      }
         <div className="absolute w-full bottom-0">
 
         <div className="border-y py-2">
                     <div className="flex justify-between px-2">
                         <div className="text-left font-semibold">Subtotal</div>
-                        <div className="text-right">৳ 117,990</div>
+                        <div className="text-right">৳ {totalPrice}</div>
                     </div>
                     <div className="flex justify-between border-b px-2">
                         <div className="text-left font-semibold">Shipping</div>
@@ -121,7 +129,7 @@ function Header({count}) {
                     </div>
                     <div className="flex justify-between pt-2 px-2">
                         <div className="text-left font-semibold">Total</div>
-                        <div className="text-right">৳ 117,990</div>
+                      <div className="text-right">৳{totalPrice}</div>
                     </div>
                 </div>
                 <div className="flex justify-evenly items-center my-5">
@@ -341,6 +349,4 @@ function Header({count}) {
 }
 export default Header;
 
-Header.propTypes = {
-  count: PropTypes.number,
-};
+

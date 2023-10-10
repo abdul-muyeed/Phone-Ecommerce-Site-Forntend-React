@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
 import Card from "./Card";
 
 function ProductList() {
+  const products = useSelector(state => state.productReducer.products)
+   console.log(products[0]._id)
+  
   return (
     <>
       <section className="bg-[#f5f5f5]">
@@ -103,13 +107,20 @@ function ProductList() {
                     </div>
                 </div>
             <div className="grid w-full gap-5 product-wrap">
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
+              {
+                products.map((product, index) => {
+                  
+                  
+                  return(
+                    <>
+                      <Card key={index} product={product}/>
+                    </>
+                  )
+                })
+              }
+              
+              
+              
             </div>
             </div>
             

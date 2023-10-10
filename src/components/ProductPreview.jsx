@@ -1,8 +1,11 @@
 import { useState } from "react";
 import Card from "./Card";
+import { useSelector } from "react-redux";
 function ProductPreview(){
     const items = ['Relevent', 'New Arrival','Best Selling','Top Rated']
   const [active, setActive] = useState(0)
+   const products = useSelector(state => state.productReducer.products)
+   console.log(products)
 
 
     return(
@@ -23,11 +26,18 @@ function ProductPreview(){
             <div className="border-l-2 py-3 px-5">All Products</div>
             </div>
             <div className="grid grid-cols-5 gap-4 ">
-              {active === 0 && <><Card/><Card/><Card/><Card/><Card/></>}
-              {active === 1 && <><Card/><Card/><Card/><Card/></>}
-              {active === 2 && <><Card/><Card/><Card/></>}
-              {active === 3 && <><Card/><Card/><Card/><Card/></>}
-              
+              {
+                   products.map((product, index) => {
+                  
+                  
+                    return(
+                      <>
+                        <Card key={index} product={product}/>
+                      </>
+                    )
+                  })
+              }
+           
             </div>
 
             
