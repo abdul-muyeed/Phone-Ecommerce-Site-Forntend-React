@@ -12,6 +12,11 @@ import {
 } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import userData from './userData.jsx'
+
+
+
+
 
 const iconNum = `flex justify-center items-center absolute w-4 h-4 right-[-10px] top-[-5px]  bg-sky-500 rounded-xl text-xs font-semibold text-white`;
 const run = () => {
@@ -35,7 +40,13 @@ function Header() {
   const count = useSelector((state) => state.cartReducer.totalItems  );
   const products = useSelector((state) => state.cartReducer.cart);
   const totalPrice = useSelector((state) => state.cartReducer.totalPrice);
+  const [user, setUser] = useState([])
   console.log(products);
+  const getUserData = async () => {
+    let data = await userData()
+    setUser(data)
+  }
+
   
   
   
@@ -73,23 +84,28 @@ function Header() {
     const subcart = document.getElementById('subcart')
     subcart.classList.toggle('active')
   }
-  const [userData, setUserData] = useState({})
-  // eslint-disable-next-line no-unused-vars
-  const user = async () => {
-    const res = await fetch("/api/token", {
-      method: "GET",
-      // credentials: "include",
-      headers: { "Content-Type": "application/json" },
-    });
-    const data = await res.json();
-    
-      setUserData(data);
-}
 
   
   useEffect(() => {
-    // user()
+    getUserData()
   },[])
+  const handleLogout = async () => {
+    const res = await fetch(`/api/logout/${user.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    const data = await res.json()
+    console.log(data)
+    if(res.status === 200){
+      window.location.reload()
+    }else{
+      alert("Something went wrong", res.status)
+    }
+    
+  }
+  console.log(user) 
     
   return (
     <>
@@ -252,7 +268,7 @@ function Header() {
                           className="text-sm font-semibold text-gray-600 cursor-pointer"
                         >
                           {
-                            userData.name ? userData.name : 'Login'
+                            user ? user.name : 'Login'
                           }
                           
                         </Link>
@@ -261,11 +277,10 @@ function Header() {
                       </li>
                       <li>
                         {
-                          userData ? (<Link
-                          to="/signout"
-                          className="text-sm font-semibold text-gray-600 cursor-pointer"
+                          user ? (<Link
+                          className="text-sm font-semibold text-gray-600 cursor-pointer" onClick={handleLogout}
                         >
-                          Sign Out
+                          Logout
                         </Link>) : (<Link
                           to="/signin"
                           className="text-sm font-semibold text-gray-600 cursor-pointer"

@@ -4,11 +4,44 @@ function LogIn(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const {name,email,password} = e.target;
-        const user = { name: name.value, email: email.value, password: password.value };
+        const user = { name: name.value, email: email.value, password: password.value }
+        const passwordLength = user.password.length >= 8;
+        const specialCharRegex = /[!@#$%^&*()_+{}\\[\]:;<>,.?~\\-]/.test(user.password);
+        const numberRegex = /[0-9]/.test(user.password);
+        const lowercaseRegex = /[a-z]/.test(user.password);
+        const uppercaseRegex = /[A-Z]/.test(user.password)
+        if( !user.name || !user.email || !user.password ){
+            alert("Fill all the fields")
+            return
+        }
+        if(!passwordLength){
+            alert("Password must be 8 characters long")
+            return
+        } 
+        if(!specialCharRegex){
+            alert("Password must contain special character Ex: !@#$%^&*()_+{}[]:;<>,.?~-")
+            return
+        } 
+        if(!numberRegex){
+            alert("Password must contain number 0-9")
+            return
+        }
+        if(!lowercaseRegex){
+            alert("Password must contain lowercase a-z")
+            return
+        }
+        if(!uppercaseRegex){
+            alert("Password must contain uppercase A-Z")
+            return
+        }
         
-        const res = await fetch('/api/register', {
+        
+        
+
+        
+        const res = await fetch("/api/register", {
             method: 'POST',
-            credentials: 'include',
+            // credentials: 'include',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)
 
@@ -16,8 +49,13 @@ function LogIn(){
         
         if(res.status === 201){
             alert("User Created Successfully")
-            window.location.href = '/'
-        }else{
+            //window.location.href = '/'
+        } else if(res.status === 400){
+            alert("User Already Exist")
+        }else if(res.status === 401){
+            alert("Mail already exist")
+        }
+        else{
             alert("User Creation Failed" + res.status)
         }
       
@@ -30,8 +68,8 @@ function LogIn(){
             <div className="bg-white shadow-xl p-10 flex flex-col gap-4 text-sm">
                 <form method="POST" onSubmit={handleSubmit} >
             <div>
-                    <label className="text-gray-600 font-bold inline-block pb-2" htmlFor="name">Full Name</label>
-                    <input className="border border-gray-400 focus:outline-slate-400 rounded-md w-full shadow-sm px-5 py-2" type="name" name="name" placeholder="Abdul Muyeed"/>
+                    <label className="text-gray-600 font-bold inline-block pb-2" htmlFor="name">Username</label>
+                    <input className="border border-gray-400 focus:outline-slate-400 rounded-md w-full shadow-sm px-5 py-2" type="name" name="name" pattern="[a-z0-9]+" placeholder="muyeed1234" title="Only lowercase and no space"/>
                 </div>
                 <div>
                     <label className="text-gray-600 font-bold inline-block pb-2" htmlFor="email">Email</label>
@@ -39,7 +77,7 @@ function LogIn(){
                 </div>
                 <div>
                     <label className="text-gray-600 font-bold inline-block pb-2" htmlFor="password">Password</label>
-                    <input className="border border-gray-400 focus:outline-slate-400 rounded-md w-full shadow-sm px-5 py-2" type="password" name="password" placeholder="******"/>
+                    <input className="border border-gray-400 focus:outline-slate-400 rounded-md w-full shadow-sm px-5 py-2" type="password" name="password" pattern="^\S*$" title="remove space \n scwe" placeholder="******"/>
                 </div>
                 <div>
                     <label className="text-gray-600 font-bold inline-block pb-2" htmlFor="cpassword">Confirm Password</label>

@@ -17,8 +17,10 @@ function SignIn(){
         if(res.status === 200){
             alert("User Created Successfully")
            window.location.href = '/'
+        }else if (res.status === 401 || res.status === 402){
+            alert("Email or Password is incorrect")
         }else{
-            alert("User Creation Failed" + res.status)
+            alert("User Creation Failed" + res.json())
         }
     }
   return(

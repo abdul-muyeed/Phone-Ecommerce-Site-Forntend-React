@@ -28,7 +28,7 @@ function Card(props) {
   const payload = {
     id: _id,
     name: name,
-    price: discount,
+    price: price,
     image: image[0],
     color: colorObj.value[0],
     ram: ram[0],
@@ -92,13 +92,13 @@ function Card(props) {
             </div>
             <div className="flex items-center">
               <p className="mr-2 text-lg font-semibold text-gray-900 ">
-                ${discount}
-              </p>
-              <p className="text-xs  font-md text-gray-500 line-through ">
                 ${price}
               </p>
+              <p className="text-xs  font-md text-gray-500 line-through ">
+                ${price - discount}
+              </p>
               <p className="ml-auto text-md font-medium text-green-500">
-                {Math.round(((price - discount) / price) * 100)}% off
+                {Math.round((discount / price) * 100)}% off
               </p>
             </div>
           </div>
